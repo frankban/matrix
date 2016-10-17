@@ -1,21 +1,21 @@
 import unittest
 
-from matrix.plugins.glitch.selectors import selector, Selectors
+from matrix.plugins.glitch.selectors import selector, SELECTORS
 
 from enforce.exceptions import RuntimeTypeError
 
 
 class TestSelectors(unittest.TestCase):
     def test_decorator(self):
-        self.assertFalse('faux_select' in Selectors)
+        self.assertFalse('faux_select' in SELECTORS)
 
         @selector
         def faux_select(model, *args, **kwargs):
             pass
 
-        self.assertTrue('faux_select' in Selectors)
+        self.assertTrue('faux_select' in SELECTORS)
 
-        self.assertEqual(Selectors['faux_select'], faux_select)
+        self.assertEqual(SELECTORS['faux_select'], faux_select)
 
     def test_valid_chain(self):
 

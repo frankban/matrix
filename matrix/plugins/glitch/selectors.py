@@ -30,8 +30,8 @@ class _Selectors(dict, metaclass=Singleton):
             self[name] = wrapper
         return wrapper
 
-Selectors = _Selectors()
-selector = Selectors.decorate
+SELECTORS = _Selectors()
+selector = SELECTORS.decorate
 
 
 @selector

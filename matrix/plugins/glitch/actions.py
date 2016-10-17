@@ -35,8 +35,8 @@ class _Actions(dict, metaclass=Singleton):
         return wrapped
 
 # Public singleton
-Actions = _Actions()
-action = Actions.decorate
+ACTIONS = _Actions()
+action = ACTIONS.decorate
 
 
 #

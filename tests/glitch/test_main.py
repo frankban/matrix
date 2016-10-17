@@ -25,23 +25,23 @@ class TestGlitch(unittest.TestCase):
         self.context.bus.dispatch = self.dispatch
 
     def dispatch(self, origin, payload, kind):
-        '''
+        """
         Quick 'n dirty dispatching function.
 
         TODO: Refactor to better handle exceptions in the dispatched
         function.
 
-        '''
+        """
         async def _dispatch():
             await payload()
 
         self.loop.create_task(_dispatch())
 
     def set_model(self):
-        '''
+        """
         Setup self.model.
 
-        '''
+        """
         async def _set_model():
             model = Model()
             await model.connect_current()
@@ -50,10 +50,10 @@ class TestGlitch(unittest.TestCase):
         self.loop.run_until_complete(_set_model())
 
     def test_glitch(self):
-        '''
+        """
         Verify that our main "glitch" routine executes smoothly.
 
-        '''
+        """
         self.action.args = {}
         self.assertTrue(self.context.model)
 
@@ -61,5 +61,5 @@ class TestGlitch(unittest.TestCase):
             self.context, self.rule, self.action))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

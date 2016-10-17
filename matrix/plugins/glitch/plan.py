@@ -1,40 +1,37 @@
 import random
 
-from .selectors import Selectors
-from .actions import Actions
+from .actions import ACTIONS
+
 
 class InvalidPlan(Exception):
     pass
+
 
 class InvalidModel(Exception):
     pass
 
 
 def validate_plan(plan):
-    '''
+    """
     Validate our plan. Raise an InvalidPlan exception with a helpful
     error message if we run into anything that is not valid.
 
-    '''
-    if not 'actions' in plan:
+    """
+    if "actions" not in plan:
         raise InvalidPlan('Plan missing "actions" key: {}'.format(plan))
 
     for action in plan['actions']:
-        if not 'action' in action:
+        if "action" not in action:
             raise InvalidPlan('Action missing "action" key: {}'.format(action))
 
         if not action.get('selectors'):
             continue
 
-        #selectors = [s['selector'] for s in action['selectors']]
-        #if not Selectors.valid_chain(selectors):
-        #    raise InvalidPlan('Action has invalid chain of selectors: {}'.format(selectors))
-
     return plan
 
 
 def generate_plan(model, num):
-    '''
+    """
     Generate a test plan. The resultant plan, if written out to a
     .yaml file, would look something like the following:
 
@@ -58,7 +55,7 @@ def generate_plan(model, num):
     defined in the code below -- we assume that the selectors that we
     list exist elsewhere in the codebase.
 
-    '''
+    """
     plan = {'actions': []}
 
     apps = model.applications
@@ -71,7 +68,7 @@ def generate_plan(model, num):
 
     for i in range(0, num):
         unit = random.choice(units)
-        action = random.choice([a for a in Actions])
+        action = random.choice([a for a in ACTIONS])
         # Setup implicit selectors
         selectors = [
             {'selector': 'units', 'application': unit.application},
